@@ -1,0 +1,5 @@
+$('.ingredient_select').empty();
+$('.ingredient_select').append( $('<option>選擇食材</option>'));
+<% @ingredients.each do |ingredient| %>
+  $('.ingredient_select').append($('<option value="<%= ingredient.id %>"><%= ingredient.item %></option>'));
+<% end %>

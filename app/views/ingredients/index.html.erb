@@ -1,0 +1,42 @@
+<%= simple_form_for @ingredient do |f| %>
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <%= f.collection_select :ingredient_type_id, IngredientType.all, :id, :name, {}, { class: 'custom-select mr-sm-2' } %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.input :item %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.button :submit, class: 'btn btn-secondary mb-2' %>
+    </div>
+  </div>
+<% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr class="row">
+      <th class="col-md-5">種類</th>
+      <th class="col-md-5">項目</th>
+      <th class="col-md-2">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ingredients.each do |i| %>
+      <tr class="row">
+        <td class="col-md-5">
+          <%= i.ingredient_type.name %>
+        </td>      
+        <td class="col-md-5">
+          <%= i.item %>
+        </td>
+        <td class="col-md-2">
+          <%= link_to ingredient_path(i), method: :delete, data: { confirm: '確定刪除？'} do %>
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          <% end %>
+        </td>        
+      </tr>
+    <% end %>  
+  </tbody>
+</table>

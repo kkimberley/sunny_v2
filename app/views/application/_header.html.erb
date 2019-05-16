@@ -1,0 +1,15 @@
+<nav class="navbar navbar-dark bg-secondary">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <ul class="navbar-nav">
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= t('nav.ingredient._ingredient') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <%= link_to "#{t('nav.ingredient.new_type')}", ingredient_types_path, class: "dropdown-item" %>
+      <%= link_to "#{t('nav.ingredient.index')}", ingredients_path, class: "dropdown-item" %>
+      <%= link_to "#{t('nav.ingredient.inventory')}", inventories_path, class: "dropdown-item" %>
+    </div>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,102 @@
+<%= simple_form_for @inventory do |f| %>
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <%= f.collection_select :ingredient_type_id, IngredientType.all, :id, :name, {}, { class: 'custom-select mr-sm-2 ingredient_type_select' } %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.collection_select :ingredient_id, IngredientType.first.ingredients, :id, :item, {}, { class: 'custom-select mr-sm-2 ingredient_select' } %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.input :price %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.input :number %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.text_field :datetime, class: 'form-control  datepicker', placeholder: '選擇日期' %>
+    </div>      
+
+    <div class="col-auto">
+      <%= f.button :submit, class: 'btn btn-secondary mb-2' %>
+    </div>
+  </div>
+<% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">種類</th>
+      <th scope="col">項目</th>
+      <th scope="col">金額</th>
+      <th scope="col">數量</th>
+      <th scope="col">小計</th>
+      <th scope="col">日期</th>
+    </tr>
+  </thead>
+
+  <% @inventories.each do |i| %>
+    <tr>
+      <td><%= i.ingredient_type.name %></td>
+      <td><%= i.ingredient.item %></td>
+      <td><%= i.price %></td>
+      <td><%= i.number %></td>
+      <td><%= i.price * i.number %></td>
+      <td><%= I18n.l i.datetime, format: :date_month_year_concise %></td>
+    </tr>
+  <% end %>
+
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"><%= @inventories.sum('price * number') %></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>  
+</table>
+
+<script>
+  $('.datepicker').pickdate({
+    cancel           : 'Clear',
+    closeOnCancel    : false,
+    closeOnSelect    : true,
+    container        : 'body',
+    containerHidden  : 'body',
+    firstDay         : 1,
+    format           : 'You selecte!d: dddd, d mm, yy',
+    formatSubmit     : 'dd/mmmm/yyyy',
+    hiddenPrefix     : 'prefix_',
+    hiddenSuffix     : '_suffix',
+    labelMonthNext   : 'Go to the next month',
+    labelMonthPrev   : 'Go to the previous month',
+    labelMonthSelect : 'Choose a month from the dropdown menu',
+    labelYearSelect  : 'Choose a year from the dropdown menu',
+    ok               : 'Close',
+    onClose          : function () {
+      console.log('Datepicker closes')
+    },
+    onOpen           : function () {
+      console.log('Datepicker opens')
+    },
+    selectMonths     : true,
+    selectYears      : 10,
+    today            : 'Today'
+  });     
+
+  $(".ingredient_type_select").on("change", function() {
+    return $.ajax({
+      url: "/ingredients/return_ingredients",
+      type: "GET",
+      dataType: "script",
+      data: {
+        ingredient_type_id: $('.ingredient_type_select option:selected').val()
+      }
+    });
+  });
+</script>

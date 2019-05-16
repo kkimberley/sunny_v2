@@ -1,0 +1,10 @@
+"zh-TW":
+  time:
+    formats:
+      date_month_year_concise: '%Y-%m-%d'  
+  nav:
+    ingredient: 
+      _ingredient: 食材
+      index: 新增食材
+      inventory: 進貨
+      new_type: 新增種類
