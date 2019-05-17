@@ -5,6 +5,11 @@ Rails.application.routes.draw do
       get 'return_ingredients'
     end
   end
-  resources :inventories
+  resources :inventories do
+    collection do
+      get 'report'
+      get 'quick_report'
+    end
+  end
   resources :ingredient_types
 end

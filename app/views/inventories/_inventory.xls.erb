@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<inventories>
+  <% @inventories.each do |inventory| %>
+    <inventory>
+      <price><%= inventory.price %></price>
+      <number><%= inventory.number %></number>
+    </inventory>
+  <% end %>
+</inventories>

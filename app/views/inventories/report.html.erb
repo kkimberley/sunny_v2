@@ -1,0 +1,54 @@
+<%= simple_form_for :inventory, url: report_inventories_path, method: :get, remote: true do |f| %>
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <%= f.collection_select :ingredient_type_id, IngredientType.all, :id, :name, { include_blank: '請選擇' }, { class: 'custom-select mr-sm-2' } %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.collection_select :ingredient_id, Ingredient.all, :id, :item, { include_blank: '請選擇'}, { class: 'custom-select mr-sm-2' } %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.button :submit, '查詢', class: 'btn btn-primary mb-2' %>
+    </div>
+    <div class="col-auto" id="export_btn"></div>    
+  </div>
+<% end %>
+<br/>
+
+<div id="report_tbl"></div>
+
+<!--------quick report------->
+<%= simple_form_for :inventory, url: quick_report_inventories_path, method: :get, remote: true, html: { id: 'quick_report_tbl' } do |f| %>
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <%= f.button :submit, '按種類', class: 'btn btn-warning mb-2 quick_report_by_type' %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.button :submit, '按月份', class: 'btn btn-info mb-2 quick_report_by_month' %>
+    </div>    
+  </div>
+<% end %>
+<br/>
+<!--// --------------card------------- -->
+<div class="row" id="card_info">
+
+</div>
+<!--// --------------card------------- -->
+
+<script>
+  $( ".quick_report_by_type" ).click(function() {
+    var input = $("<input>")
+                  .attr("type", "hidden")
+                  .attr("name", "by").val("type");
+    $('#quick_report_tbl').append(input);
+  });
+
+  $( ".quick_report_by_month" ).click(function() {
+    var input = $("<input>")
+                  .attr("type", "hidden")
+                  .attr("name", "by").val("month");
+    $('#quick_report_tbl').append(input);
+  });  
+</script>
