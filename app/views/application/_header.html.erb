@@ -1,10 +1,18 @@
 <nav class="navbar navbar-dark bg-secondary">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Sunny</a>
   <ul class="navbar-nav">
+    <li class="nav-item">
+      <% if signed_in? %>
+        <%= button_to "登出", sign_out_path, method: :delete, class: 'btn btn-outline-light my-2 my-sm-0' %>
+      <% else %>
+        <%= link_to "登入", sign_in_path %>
+      <% end %> 
+    </li>
+
     <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <%= t('nav.ingredient._ingredient') %>
-    </a>
+    </a>   
     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
       <%= link_to "#{t('nav.ingredient.new_type')}", ingredient_types_path, class: "dropdown-item" %>
       <%= link_to "#{t('nav.ingredient.index')}", ingredients_path, class: "dropdown-item" %>
