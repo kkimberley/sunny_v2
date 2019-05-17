@@ -42,24 +42,30 @@
 <table class="table table-striped">
 
   <thead class="thead-dark">
-    <tr>
-      <th scope="col">種類</th>
-      <th scope="col">項目</th>
-      <th scope="col">金額</th>
-      <th scope="col">數量</th>
-      <th scope="col">小計</th>
-      <th scope="col">日期</th>
+    <tr class="row">
+      <th class="col-md-2">種類</th>
+      <th class="col-md-2">項目</th>
+      <th class="col-md-2">金額</th>
+      <th class="col-md-1">數量</th>
+      <th class="col-md-2">小計</th>
+      <th class="col-md-2">日期</th>
+      <th class="col-md-1">操作</th>
     </tr>
   </thead>
 
   <% @inventories.each do |i| %>
-    <tr>
-      <td><%= i.ingredient_type.name %></td>
-      <td><%= i.ingredient.item %></td>
-      <td><%= i.price %></td>
-      <td><%= i.number %></td>
-      <td><%= i.price * i.number %></td>
-      <td><%= I18n.l i.datetime, format: :date_month_year_concise %></td>
+    <tr class="row">
+      <td class="col-md-2"><%= i.ingredient_type.name %></td>
+      <td class="col-md-2"><%= i.ingredient.item %></td>
+      <td class="col-md-2"><%= i.price %></td>
+      <td class="col-md-1"><%= i.number %></td>
+      <td class="col-md-2"><%= i.price * i.number %></td>
+      <td class="col-md-2"><%= I18n.l i.datetime, format: :date_month_year_concise %></td>
+      <td class="col-md-1">
+        <%= link_to inventory_path(i), method: :delete, data: { confirm: '確定刪除？'} do %>
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        <% end %>
+      </td>       
     </tr>
   <% end %> 
 </table>
