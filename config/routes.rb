@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   resources :inventories do
     collection do
       get 'report'
-      get 'quick_report'
+      get 'quick_report_by_type'
+      get 'quick_report_by_month'
     end
   end
   resources :ingredient_types

@@ -19,36 +19,22 @@
 <div id="report_tbl"></div>
 
 <!--------quick report------->
-<%= simple_form_for :inventory, url: quick_report_inventories_path, method: :get, remote: true, html: { id: 'quick_report_tbl' } do |f| %>
+<%= simple_form_for :inventory, url: quick_report_by_type_inventories_path, method: :get, remote: true, html: { id: 'quick_report_tbl' } do |f| %>
   <div class="form-row align-items-center">
     <div class="col-auto">
-      <%= f.button :submit, '按種類', class: 'btn btn-warning mb-2 quick_report_by_type' %>
-    </div>
+      <%= f.button :submit, '按種類', class: 'btn btn-warning mb-2' %>
+    </div>   
+  </div>
+<% end %>
 
+<%= simple_form_for :inventory, url: quick_report_by_month_inventories_path, method: :get, remote: true, html: { id: 'quick_report_tbl' } do |f| %>
     <div class="col-auto">
-      <%= f.button :submit, '按月份', class: 'btn btn-info mb-2 quick_report_by_month' %>
+      <%= f.button :submit, '按月份', class: 'btn btn-info mb-2' %>
     </div>    
   </div>
 <% end %>
+
 <br/>
 <!--// --------------card------------- -->
-<div class="row" id="card_info">
-
-</div>
+<div class="row col-auto" id="card_info"></div>
 <!--// --------------card------------- -->
-
-<script>
-  $( ".quick_report_by_type" ).click(function() {
-    var input = $("<input>")
-                  .attr("type", "hidden")
-                  .attr("name", "by").val("type");
-    $('#quick_report_tbl').append(input);
-  });
-
-  $( ".quick_report_by_month" ).click(function() {
-    var input = $("<input>")
-                  .attr("type", "hidden")
-                  .attr("name", "by").val("month");
-    $('#quick_report_tbl').append(input);
-  });  
-</script>

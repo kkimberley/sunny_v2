@@ -1,0 +1,14 @@
+<%= simple_form_for @ingredient do |f| %>
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <%= f.input :item %>
+      </div>
+
+      <div class="col-auto">
+        <%= f.input :unit %>
+      </div>
+      <div class="col-auto">
+        <%= f.button :submit, class: 'btn btn-secondary mb-2' %>
+      </div>
+    </div>
+<% end %>

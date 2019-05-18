@@ -1,0 +1,14 @@
+<% @group_type.each do |key, value| %>
+  <div class="col-sm-4">
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+      <div class="card-header"><%= IngredientType.find(key)&.name %>: <%= value.inject(0){|sum, x| sum + (x.price * x.number) } %></div>
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <% @group_inventories.each do |key2, value2| %>
+          <% next unless key == key2.first %>
+          <p class="card-text"><%= Ingredient.find(key2.last)&.item %>: <%= value2.inject(0){|sum, x| sum + (x.price * x.number) } %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

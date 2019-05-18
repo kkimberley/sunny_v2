@@ -13,8 +13,17 @@
     <div class="container">
       <%= render 'header' %>
       <br/>
-      <div class="container">
-        <%= yield %>
+      <div class="card">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <span class="nav-link" id="current_page_title"><p class="lead"><%= @current_page_title %></p></span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <%= yield %>
+        </div>
       </div>
     </div>
   </body>

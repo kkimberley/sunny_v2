@@ -27,49 +27,52 @@
 <% end %>
 
 <div class="card">
-  <div class="card-header">
-    總計金額
+  <div class="card-header bg-primary">
+    <p class="text-white">資訊</p>
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <p><%= @inventories.sum('price * number') %></p>
+      <p class="card-text">年度最高單價：<%= @top_of_this_year.price %>, 進貨日期： <%= I18n.l @top_of_this_year.datetime, format: :date_month_year_concise %></p>
+      <p class="card-text">近3個月最高單價：<%= @top_of_last_three_months.price %>, 進貨日期： <%= I18n.l @top_of_last_three_months.datetime, format: :date_month_year_concise %></p>
       <footer class="blockquote-footer">單筆最高花費： <%= @inventories.maximum('price * number') %></footer>
     </blockquote>
   </div>
 </div>
 
+<br/>
 <%= paginate @inventories, left: 1, right: 5 %>
-<table class="table table-striped">
+<div class="col-auto">
+  <table class="table table-striped">
 
-  <thead class="thead-dark">
-    <tr class="row">
-      <th class="col-md-2">種類</th>
-      <th class="col-md-2">項目</th>
-      <th class="col-md-2">金額</th>
-      <th class="col-md-1">數量</th>
-      <th class="col-md-2">小計</th>
-      <th class="col-md-2">日期</th>
-      <th class="col-md-1">操作</th>
-    </tr>
-  </thead>
+    <thead class="thead-dark">
+      <tr class="row">
+        <th class="col-md-2">種類</th>
+        <th class="col-md-2">項目</th>
+        <th class="col-md-2">金額</th>
+        <th class="col-md-1">數量</th>
+        <th class="col-md-2">小計</th>
+        <th class="col-md-2">日期</th>
+        <th class="col-md-1">操作</th>
+      </tr>
+    </thead>
 
-  <% @inventories.each do |i| %>
-    <tr class="row">
-      <td class="col-md-2"><%= i.ingredient_type.name %></td>
-      <td class="col-md-2"><%= i.ingredient.item %></td>
-      <td class="col-md-2"><%= i.price %></td>
-      <td class="col-md-1"><%= i.number %></td>
-      <td class="col-md-2"><%= i.price * i.number %></td>
-      <td class="col-md-2"><%= I18n.l i.datetime, format: :date_month_year_concise %></td>
-      <td class="col-md-1">
-        <%= link_to inventory_path(i), method: :delete, data: { confirm: '確定刪除？'} do %>
-          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-        <% end %>
-      </td>       
-    </tr>
-  <% end %> 
-</table>
-
+    <% @inventories.each do |i| %>
+      <tr class="row">
+        <td class="col-md-2"><%= i.ingredient_type.name %></td>
+        <td class="col-md-2"><%= i.ingredient.item %></td>
+        <td class="col-md-2"><%= i.price %></td>
+        <td class="col-md-1"><%= i.number %></td>
+        <td class="col-md-2"><%= i.price * i.number %></td>
+        <td class="col-md-2"><%= I18n.l i.datetime, format: :date_month_year_concise %></td>
+        <td class="col-md-1">
+          <%= link_to inventory_path(i), method: :delete, data: { confirm: '確定刪除？'} do %>
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          <% end %>
+        </td>       
+      </tr>
+    <% end %> 
+  </table>
+</div>
 <script>
   $('.datepicker').pickdate({
     cancel           : 'Clear',

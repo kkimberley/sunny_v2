@@ -1,5 +1,6 @@
 class IngredientTypesController < ApplicationController
   def index
+    @current_page_title = t('nav.ingredient.new_type')
     @ingredient_type = IngredientType.new
     @ingredient_types = IngredientType.all
   end

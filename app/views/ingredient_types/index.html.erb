@@ -9,26 +9,28 @@
   </div>
 <% end %>
 
-<table class="table table-striped">
-  <thead class="thead-dark">
-    <tr class="row">
-      <th class="col-md-10">項目</th> 
-      <th class="col-md-2">操作</th> 
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @ingredient_types.each do |i| %>
+<div class="col-auto">
+  <table class="table table-striped">
+    <thead class="thead-dark">
       <tr class="row">
-        <td class="col-md-10">
-          <%= i.name %>
-        </td>
-        <td class="col-md-2">
-          <%= link_to ingredient_type_path(i), method: :delete, data: { confirm: '確定刪除？'} do %>
-            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          <% end %>
-        </td>
+        <th class="col-md-10">項目</th> 
+        <th class="col-md-2">操作</th> 
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @ingredient_types.each do |i| %>
+        <tr class="row">
+          <td class="col-md-10">
+            <%= i.name %>
+          </td>
+          <td class="col-md-2">
+            <%= link_to ingredient_type_path(i), method: :delete, data: { confirm: '確定刪除？'} do %>
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
