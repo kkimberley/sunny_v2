@@ -9,3 +9,5 @@
       inventory: 進貨
       new_type: 新增種類
       report: 報表
+    account:
+      _account: 計帳

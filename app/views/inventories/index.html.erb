@@ -32,9 +32,9 @@
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <p class="card-text">年度最高單價：<%= @top_of_this_year.price %>, 進貨日期： <%= I18n.l @top_of_this_year.datetime, format: :date_month_year_concise %></p>
-      <p class="card-text">近3個月最高單價：<%= @top_of_last_three_months.price %>, 進貨日期： <%= I18n.l @top_of_last_three_months.datetime, format: :date_month_year_concise %></p>
-      <footer class="blockquote-footer">單筆最高花費： <%= @inventories.maximum('price * number') %></footer>
+      <p class="card-text">年度最高單價：<%= @top_of_this_year&.price %>, 進貨日期： <%= I18n.l @top_of_this_year.datetime, format: :date_month_year_concise if @top_of_this_year %></p>
+      <p class="card-text">近3個月最高單價：<%= @top_of_last_three_months&.price %>, 進貨日期： <%= I18n.l @top_of_last_three_months.datetime, format: :date_month_year_concise if @top_of_last_three_months %></p>
+      <footer class="blockquote-footer">單筆最高花費： <%= @inventories&.maximum('price * number') %></footer>
     </blockquote>
   </div>
 </div>
