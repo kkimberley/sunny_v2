@@ -55,7 +55,7 @@
     <thead class="thead-dark">
       <tr class="row">
         <th class="col-md-1">種類</th>
-        <th class="col-md-1">項目</th>
+        <th class="col-md-2">項目</th>
         <th class="col-md-1">金額</th>
         <th class="col-md-1">數量</th>
         <th class="col-md-1">小計</th>
@@ -63,14 +63,14 @@
         <th class="col-md-1">調帳金額</th>
         <th class="col-md-1">調帳後</th>
         <th class="col-md-2">日期</th>
-        <th class="col-md-2">操作</th>
+        <th class="col-md-1">操作</th>
       </tr>
     </thead>
 
     <% @inventories.each do |i| %>
       <tr class="row">
         <td class="col-md-1"><%= i.ingredient_type.name %></td>
-        <td class="col-md-1"><%= i.ingredient.item %></td>
+        <td class="col-md-2"><%= i.ingredient.item %></td>
         <td class="col-md-1"><%= i.price %></td>
         <td class="col-md-1"><%= i.number %></td>
         <td class="col-md-1"><%= (i.price * i.number).round(2) %></td>
@@ -78,7 +78,7 @@
         <td class="col-md-1"><%= i.adjust_price %></td>
         <td class="col-md-1"><%= i.price_after_adjust %></td>
         <td class="col-md-2"><%= I18n.l i.datetime, format: :date_month_year_concise %></td>
-        <td class="col-md-2">
+        <td class="col-md-1">
           <%= link_to inventory_path(i), method: :delete, data: { confirm: '確定刪除？'} do %>
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
           <% end %>
