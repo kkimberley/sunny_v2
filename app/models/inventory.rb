@@ -23,4 +23,10 @@ class Inventory < ApplicationRecord
       all
     end
   }
+
+  before_create :set_default_date
+
+  def set_default_date
+    self.datetime = DateTime.now if self.datetime == nil
+  end
 end
