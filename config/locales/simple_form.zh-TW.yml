@@ -4,6 +4,8 @@ zh-TW:
       inventory:
         price: '價格'
         number: '數量'
+        adjust_symbol: '調整方式'
+        adjust_price: '調整價格'
     "yes": 'Yes'
     "no": 'No'
     required:

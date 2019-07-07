@@ -57,6 +57,8 @@ class InventoriesController < ApplicationController
   private
 
   def inventory_params
-    params.require(:inventory).permit(:price, :number, :datetime, :ingredient_type_id)
+    params.require(:inventory).permit(:price, :number, :datetime,
+                                      :ingredient_type_id, :adjust_symbol,
+                                      :adjust_price)
   end
 end

@@ -24,9 +24,22 @@ class Inventory < ApplicationRecord
     end
   }
 
-  before_create :set_default_date
+  before_create :set_default_date, :adjust_total
+
+  enum adjust_symbol: { add: 'add', minus: 'minus', equal: 'equal' }
 
   def set_default_date
-    self.datetime = DateTime.now if self.datetime == nil
+    self.datetime = DateTime.now if datetime.nil?
+  end
+
+  def adjust_total
+    self.price_after_adjust = case adjust_symbol
+                              when 'add'
+                                (price * number) + adjust_price
+                              when 'minus'
+                                (price * number) - adjust_price
+                              else
+                                price * number
+                              end
   end
 end
